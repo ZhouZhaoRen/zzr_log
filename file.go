@@ -10,54 +10,54 @@ import (
 )
 
 var (
-	F *os.File
-	LogLevel=[]string{"DEBUG","INFO","WARN","ERROR","FATAL"}
+	f *os.File
+	logLevel=[]string{"DEBUG","INFO","WARN","ERROR","FATAL"}
 	logger *log.Logger
 )
 
 
 const (
-	DEBUG  =iota
-	INFO
-	WARN
-	ERROR
-	FATAL
+	debug  =iota
+	info
+	warn
+	error
+	fatal
 )
 
 func init() {
 	pathName:=getLogFullPath()
-	F=openFile(pathName)
-	logger=log.New(F,"",log.LstdFlags)
+	f=openFile(pathName)
+	logger=log.New(f,"",log.LstdFlags)
 }
 
 func Debug(v ...interface{}) {
-	SetPrefix(DEBUG)
+	setPrefix(debug)
 	logger.Println(v)
 }
 func Info(v ...interface{}) {
-	SetPrefix(INFO)
+	setPrefix(info)
 	logger.Println(v)
 }
 func Warn(v ...interface{}) {
-	SetPrefix(WARN)
+	setPrefix(warn)
 	logger.Println(v)
 }
 func Error(v ...interface{}) {
-	SetPrefix(ERROR)
+	setPrefix(error)
 	logger.Println(v)
 }
 func Fatal(v ...interface{}) {
-	SetPrefix(FATAL)
+	setPrefix(fatal)
 	logger.Println(v)
 }
 
-func SetPrefix(level int) {
+func setPrefix(level int) {
 	prefix:=""
 	_, file, line, ok := runtime.Caller(2)
 	if ok {
-		prefix=fmt.Sprintf("[%s][%s:%d]",LogLevel[level],filepath.Base(file),line)
+		prefix=fmt.Sprintf("[%s][%s:%d]",logLevel[level],filepath.Base(file),line)
 	}else {
-		prefix=fmt.Sprintf("[%s]",LogLevel[level])
+		prefix=fmt.Sprintf("[%s]",logLevel[level])
 	}
 	logger.SetPrefix(prefix)
 }
