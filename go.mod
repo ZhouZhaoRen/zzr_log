@@ -1,1 +1,1 @@
-module "zzr_log"
+module "github.com/ZhouZhaoRen/zzr_log"
