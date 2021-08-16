@@ -1,4 +1,4 @@
-package main
+package file
 
 import (
 	"fmt"
@@ -30,9 +30,6 @@ func init() {
 	logger=log.New(F,"",log.LstdFlags)
 }
 
-func main() {
-	Debug("我的日志文件打印")
-}
 func Debug(v ...interface{}) {
 	SetPrefix(DEBUG)
 	logger.Println(v)
